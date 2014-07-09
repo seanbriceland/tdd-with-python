@@ -50,7 +50,7 @@ class NewVisitorTest(unittest.TestCase):
         
         # page updates again, showing both items in list
         self.check_for_row_in_list_table('1: Buy peacock feathers')
-        self.check_for_row_in_list_table('Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
         # User wonders if the site will remember the to-do list
         # they take note of the URL 
