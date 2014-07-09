@@ -34,24 +34,32 @@ class NewVisitorTest(unittest.TestCase):
         # verify page is updated and lists to-do item
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows),
-            "New to-do item did not not appear in table"
-        )
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
         
         # verify there is an input again to add an item
         # user enters another to-do item
-        self.fail('Finish the test!')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
         
         # page updates again, showing both items in list
-        
+        table = self.browser.find_element_by_id('id_list_table')
+        row = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn(
+            '2: Use peacock feathers to make a fly',
+            [row.text for row in rows]
+        )
+
         # User wonders if the site will remember the to-do list
         # they take note of the URL 
-        
+        self.fail('Finish the test!')
+
         # visit the url and check to-do list is still there
         
         # All tests run
         browser.quit()
-    
+
+
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
