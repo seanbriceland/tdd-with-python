@@ -7,7 +7,7 @@ class NewVisitorTest(LiveServerTestCase):
     
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(1)
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
@@ -16,6 +16,29 @@ class NewVisitorTest(LiveServerTestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
+
+    def test_layout_and_styling(self):
+        # a user goes to the homepage
+        self.browser.get(self.live_server_url)
+
+        # user notices the input box is nicely centered
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        window_width = self.browser.get_window_size()['width']
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            window_width/2,
+            delta=5
+        )
+
+        # users enters an item and checks if input box on list.html is centered
+        inputbox.send_keys('testing\n')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        window_width = self.browser.get_window_size()['width']
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width']/2,
+            window_width / 2,
+            delta=5
+        )
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         # go to homepage
