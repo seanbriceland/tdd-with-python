@@ -34,7 +34,7 @@ class NewVisitorTest(StaticLiveServerCase):
 
     def test_layout_and_styling(self):
         # a user goes to the homepage
-        self.browser.get(self.live_server_url)
+        self.browser.get(self.server_url)
 
         # user notices the input box is nicely centered
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -57,7 +57,7 @@ class NewVisitorTest(StaticLiveServerCase):
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         # go to homepage
-        self.browser.get(self.live_server_url)
+        self.browser.get(self.server_url)
         
         # verify title of homepage
         self.assertIn('To-Do', self.browser.title)
