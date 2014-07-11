@@ -1,4 +1,5 @@
 import sys
+from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -10,7 +11,11 @@ class NewVisitorTest(StaticLiveServerCase):
     def setUpClass(cls):
         for arg in sys.argv:
             if 'liveserver' in arg:
-                cls.server_url = 'http://' + arg.split('=')[1]
+                val = arg.split('=')[1]
+                if val == 'ip':
+                    cls.server_url = 'http://' + settings.LIVE_SERVER_IP
+                else:
+                    cls.server_url = 'http://' + arg.split('=')[1]
                 return
         super().setUpClass()
         cls.server_url = cls.live_server_url
@@ -99,7 +104,7 @@ class NewVisitorTest(StaticLiveServerCase):
         self.browser = webdriver.Firefox()
 
         # User 2 visits the home page. There is no sign of User 1s list
-        self.browser.get(self.live_server_url)
+        self.browser.get(self.server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertNotIn('make a fly', page_text)
