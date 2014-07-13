@@ -1,9 +1,9 @@
 import sys
-from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+LIVE_SERVER_IP = '54.187.47.225'
 
 class NewVisitorTest(StaticLiveServerCase):
 
@@ -13,7 +13,7 @@ class NewVisitorTest(StaticLiveServerCase):
             if 'liveserver' in arg:
                 val = arg.split('=')[1]
                 if val == 'ip':
-                    cls.server_url = 'http://' + settings.LIVE_SERVER_IP
+                    cls.server_url = 'http://' + LIVE_SERVER_IP
                 else:
                     cls.server_url = 'http://' + arg.split('=')[1]
                 return

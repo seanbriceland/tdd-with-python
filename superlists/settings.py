@@ -82,5 +82,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
-
-LIVE_SERVER_IP = '54.191.122.242'
