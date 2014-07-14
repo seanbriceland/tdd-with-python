@@ -1,3 +1,4 @@
 Django==1.7c1
+gunicorn==19.0.0
 selenium==2.42.1
 wget==2.1
