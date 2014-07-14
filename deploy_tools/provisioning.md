@@ -16,6 +16,7 @@ eg, on Ubuntu:
     sudo pip3 install virtualenv
 
 ## Nginx Virtual Host Config
+
  * see nginx.template.conf
  * replace SITENAME with, eg, staging.example-domain.com
 
@@ -25,12 +26,20 @@ eg, on Ubuntu:
  * replace SITENAME with, eg, staging.example-domain.com
 
 ## Folder Structure:
+
 (Assume we have a nonroot user with sudo priveleges at /home/username)
 
+
 /home/username
+
     └── sites
+
         └── SITENAME
+
             ├── database
+
             ├── source
+
             ├── static
+
             └── virtualenv
